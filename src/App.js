@@ -29,16 +29,17 @@ const App = (props) => {
 
   const deleteMovie = (id) => {
     setMovies(movies.filter(item=>(item.id !== id)));
+    setFavoriteMovies(favoriteMovies.filter(item=>(item.id !== id)));
   }
 
   const addToFavorites = (movie) => {
-
+    setFavoriteMovies([...favoriteMovies, movie]);
   }
 
   return (
     <div>
       <nav className="navbar navbar-dark bg-dark">
-        <span className="navbar-brand" > HTTP / CRUD Module Project</span>
+        <span className="navbar-brand" > HTTP / CRUD Project</span>
       </nav>
 
       <div className="container">
@@ -49,9 +50,9 @@ const App = (props) => {
           <Routes>
             <Route path="movies/add" element={<AddMovieForm setMovies={setMovies}/>}/>
 
-            <Route path="movies/edit/:id" element={<EditMovieForm  setMovies={setMovies}/>} />
+            <Route path="movies/edit/:id" element={<EditMovieForm setMovies={setMovies}/>} />
 
-            <Route path="movies/:id" element={<Movie deleteMovie={deleteMovie}/>}/>
+            <Route path="movies/:id" element={<Movie addToFavorites={addToFavorites} deleteMovie={deleteMovie}/>}/>
 
             <Route path="movies" element={<MovieList movies={movies} />} />
 
